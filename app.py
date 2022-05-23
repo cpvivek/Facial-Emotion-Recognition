@@ -64,7 +64,7 @@ def main():
   
 
     st.markdown(html_temp, unsafe_allow_html=True)
-    st.write("Created by Lakshmi Narayana")
+    st.write("Created by Vivek CP")
     st.write("Model built from OpenCV, Custom CNN model and Streamlit")
     st.write("**Directions**")
     st.write('''
