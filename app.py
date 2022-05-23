@@ -1,10 +1,9 @@
-import cv2
 import numpy as np
+import cv2
 import streamlit as st
 from tensorflow import keras
 from keras.models import model_from_json
-from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
-from streamlit_webrtc import RTCConfiguration, VideoProcessorBase, WebRtcMode
+from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, RTCConfiguration, VideoProcessorBase, WebRtcMode
 
 # load model
 emotion_dict = {0: 'anger', 1: 'disgust', 2: 'fear', 3: 'happy', 4: 'sad',5: 'suprise', 6: 'neutral'}
@@ -52,34 +51,62 @@ class Faceemotion(VideoTransformerBase):
         return img
 
 def main():
-    # Face Emotion Application #
-    html_temp = """
-    <body style="background-color:red;">
-    <div style="background-color:blue ;padding:10px">
-    <h2 style="color:white;text-align:center;">Face Emotion Recognisation App</h2>
-    <style>#"Made by- Vivek CP" {text-align: center}</style>
-    </div>
-    </body>
-    """
-  
-
-    st.markdown(html_temp, unsafe_allow_html=True)
-    st.write("Created by Vivek CP")
-    st.write("Model built from OpenCV, Custom CNN model and Streamlit")
-    st.write("**Directions**")
-    st.write('''
-                
-                1. Click on the START button to start the session.
-                
-                2. Allow the Webcam access to utilise the service. 
+    # Face Analysis Application #
+    st.title("Real Time Face Emotion Detection Application")
+    activiteis = ["Home", "Webcam Emotion Detection", "About"]
+    choice = st.sidebar.selectbox("Select Activity", activiteis)
+    st.sidebar.markdown(
+        """ Developed by Rohan Jagadale""")
+    if choice == "Home":
+        html_temp_home1 = """<div style="background-color:#6D7B8D;padding:10px">
+                                            <h4 style="color:white;text-align:center;">
+                                            Face Emotion detection application using OpenCV, Custom CNN model and Streamlit.</h4>
+                                            </div>
+                                            </br>"""
+        st.markdown(html_temp_home1, unsafe_allow_html=True)
+        st.write("""
+                 Instruction while using this APP.
+		 
+    1. Click on the home button and select Webcam Emotion Detection.
+    
+    2. Click on the Start button to start.
+		 
+    3. Allow the webcam access and WebCam window will open afterwardsn.
+    
+    4. It will load the realtime face emotion detection block with the prediction.
+    
+    5. Click on  Stop  to end.
+		     
+                 """)
         
-                3. It will predict the realtime face emotion using webcam.
-                
-                4. Click on STOP to end the session.
-                
-                ''')
-    webrtc_streamer(key="example", mode=WebRtcMode.SENDRECV, rtc_configuration=RTC_CONFIGURATION,
-                        video_processor_factory=Faceemotion)
+	
+    elif choice == "Webcam Emotion Detection":
+        st.header("Webcam Live Feed")
+        st.write("Click on start to use webcam and detect your face emotion")
+        webrtc_streamer(key="example", mode=WebRtcMode.SENDRECV, rtc_configuration=RTC_CONFIGURATION,
+                        video_processor_factory=Faceemotion)  
+
+    elif choice == "About":
+        st.subheader("About this app")
+        html_temp_about1= """<div style="background-color:#6D7B8D;padding:10px">
+                                    <h4 style="color:white;text-align:center;">
+                                    Real time face emotion detection application</h4>
+                                    </div>
+                                    </br>"""
+        st.markdown(html_temp_about1, unsafe_allow_html=True)
+
+        html_temp4 = """
+                             		<div style="background-color:#98AFC7;padding:10px">
+                             		<h4 style="color:white;text-align:center;">This Application is developed by Rohan Jagadale using Streamlit Framework, Opencv, Tensorflow and Keras library for Almabetter Capstone Project. </h4>
+                             		<h4 style="color:white;text-align:center;">Thanks for Visiting</h4>
+                             		</div>
+                             		<br></br>
+                             		<br></br>"""
+
+        st.markdown(html_temp4, unsafe_allow_html=True)
+
+    else:
+        pass
 
 
 if __name__ == "__main__":
