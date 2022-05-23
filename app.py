@@ -3,7 +3,6 @@ import numpy as np
 import streamlit as st
 from tensorflow import keras
 from keras.models import model_from_json
-from keras.preprocessing.image import img_to_array
 from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 from streamlit_webrtc import RTCConfiguration, VideoProcessorBase, WebRtcMode
 
@@ -41,7 +40,7 @@ class Faceemotion(VideoTransformerBase):
             roi_gray = cv2.resize(roi_gray, (48, 48), interpolation=cv2.INTER_AREA)
             if np.sum([roi_gray]) != 0:
                 roi = roi_gray.astype('float') / 255.0
-                roi = img_to_array(roi)
+                roi = tf.keras.preprocessing.image.img_to_array(roi)
                 roi = np.expand_dims(roi, axis=0)
                 prediction = classifier.predict(roi)[0]
                 maxindex = int(np.argmax(prediction))
@@ -58,7 +57,7 @@ def main():
     <body style="background-color:red;">
     <div style="background-color:blue ;padding:10px">
     <h2 style="color:white;text-align:center;">Face Emotion Recognisation App</h2>
-    <style>#"Created by Lakshmi Narayana" {text-align: center}</style>
+    <style>#"Made by- Vivek CP" {text-align: center}</style>
     </div>
     </body>
     """
