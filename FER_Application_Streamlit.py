@@ -29,13 +29,13 @@ except Exception:
     st.write("haarcascade loading error")
 
     #capturing face from camera stream
-class VideoTranformer(VideoTransformerBase):
+class VideoTransformer(VideoTransformerBase):
     def transform(self,frame):
         img=frame.to_ndarray(format="bgr24")
         
         grayscale=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         
-        faces=face_haar_cascade.detectMultiScale(image=grayscale)
+        faces=face_haar_cascade.detectMultiScale(image=grayscale,scaleFactor=1.3,minNeighbors=5)
         
         #forming box around face
         for (x,y,w,h) in faces:
@@ -48,7 +48,7 @@ class VideoTranformer(VideoTransformerBase):
             #converting obtained bgr image to grayscale
             roi_gray=grayscale[y-5:y+h+5,x-5:x+w+5] #adding buffer
             roi_gray=cv2.resize(roi_gray,(48,48))
-            image_pixels=img_too_array(roi_array)
+            image_pixels=img_to_array(roi_gray)
             image_pixels=np.expand_dims(image_pixels,axis=0)
             
             #normalizing
