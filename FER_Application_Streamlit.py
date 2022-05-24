@@ -14,7 +14,12 @@ from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, RTCConfigura
 #page title
 st.set_page_config(page_title="Facial Emotion Detection")
 #loading saved model
-model=tf.keras.models.load_model('model_fer_4.h5')
+json_file=open('model_fer_4.json','r')
+loaded_model_json=json_file.read()
+json_file.close()
+classifier= model_from_json(loaded_model_json)
+
+classifier.load_weights("model_fer_4.h5")
 
 #implimneting haarcascade
 try:
@@ -48,11 +53,11 @@ class VideoTranformer(VideoTransformerBase):
             #normalizing
             
             image_pixels= image_pixels/255.
-            predictions= model.predict(image_pixels)
+            predictions= classifier.predict(image_pixels)
             max_index=np.argmax(predictions[0])
             
             emotions= ['Angry','Disgusted','Fearful','Happy', 'Sad', 'Surprised', 'Neutral']
-            emotion_prediction=emotion[max_index]
+            emotion_prediction=emotions[max_index]
             
             font=cv2.FONT_HERSHEY_SIMPLEX
             lable_color=(0, 255, 0)
