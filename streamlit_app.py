@@ -81,7 +81,7 @@ def main():
         st.write('''
 
                     Click on START, and grant access to webcam to start the program. The program will try to predict your emotion in real time.
-                    Click on STOP to end the session
+                    Click on STOP to end the session. Mute the audio to avoid feedback interference.
 
                     ''')
         webrtc_streamer(key="example", mode=WebRtcMode.SENDRECV, rtc_configuration=RTC_CONFIGURATION,
