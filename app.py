@@ -62,7 +62,7 @@ def main():
                  
     st.title(page_name)
                  
-    if page_name=='Home'
+    if page_name=='Home':
     # Face Emotion Application #
         html_temp = """
         <body style="background-color:blue;">
