@@ -8,7 +8,7 @@ from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 from streamlit_webrtc import RTCConfiguration, VideoProcessorBase, WebRtcMode
 
 # load model
-emotion_dict = {0: 'angry', 1: 'disgusted', 2: 'fearful', 3: 'happy', 4: 'sad',5: 'surprised', 6: 'neutral'}
+emotion_dict = {0: 'ANGRY', 1: 'DISGUSTED', 2: 'FEARFUL', 3: 'HAPPY', 4: 'SAD',5: 'SURPRISED', 6: 'NEUTRAL'}
 # load json and create model
 json_file = open('model_fer_4.json', 'r')
 loaded_model_json = json_file.read()
@@ -67,7 +67,7 @@ def main():
         home_html = """
         <body style="background-color:blue;">
         <div style="background-color:red ;padding:10px">
-        <h2 style="color:white;text-align:center;">Face Emotion Recognisation App</h2>
+        <h2 style="color:white;text-align:center;">Facial Emotion Recognition Program/h2>
         <style>#"An Application by Vivek CP" {text-align: center}</style>
         </div>
         </body>
