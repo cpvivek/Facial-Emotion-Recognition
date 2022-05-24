@@ -79,7 +79,7 @@ def main():
     st.title(page_name)
     
     
-    if page_name==' Home':
+    if page_name=='Home':
         home_html=""" <body>
         <h4 style="font-size:30px"> Live Emotion Detection</h4>
         <p> This application detects emotion in real time from your camera feed using a CNN model. </p>
@@ -105,7 +105,7 @@ def main():
         st.write("This project is developed by Vivek CP, Data Science Trainee at AlmaBetter.")
         statement_html="""<body>
         <h4 style="font-size:20px"> About Project </h4>
-        <p> Facial emotion recognition is an age old problem in the field of deep learning. The learning objective of the project is to gain hands on experience in developing a CNN model, and deploy it in real time. The model has achieved an training accuracy of 74% and test accuracy of 67%. The numbers can be improved by expanding the dataset and using techniques like transfer learning. This is included in the future scope of the project. <p>
+        <p> Facial emotion recognition is an age old problem in the field of deep learning. The learning objective of the project is to gain hands on experience in developing a CNN model, and deploy it in real time. The model has achieved an training accuracy of 74% and test accuracy of 67%. The numbers can be improved by expanding the dataset and using techniques like transfer learning. This would be included in the future scope of the project. <p>
         <body>"""
         
         st.markdown(statement_html,True)
