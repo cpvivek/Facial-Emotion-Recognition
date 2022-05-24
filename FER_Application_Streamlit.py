@@ -89,7 +89,7 @@ def main():
         {"iceServers":[{"urls":["stun:stun.1.google.com:19302"]}]}
         ) )
         
-    elif page_name="About":
+    elif page_name=="About":
         about_html="""<body>
         <h4 style="font-size:30px"> Facial emotion detection using CNN in real time</h4>
             <body>""" 
