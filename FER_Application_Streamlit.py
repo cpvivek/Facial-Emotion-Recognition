@@ -6,7 +6,7 @@ from keras.utils import img_to_array
 import streamlit as st
 import cv2
 from keras.models import model_from_json
-from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, RTCConfiguration
+from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, RTCConfiguration,WebRtcMode
 
 
 # In[12]:
