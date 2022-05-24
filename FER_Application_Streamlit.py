@@ -28,10 +28,14 @@ try:
 except Exception:
     st.write("haarcascade loading error")
 
+    
+RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]})
+
+
     #capturing face from camera stream
 class VideoTransformer(VideoTransformerBase):
     def transform(self,frame):
-        img=frame.to_ndarray(format="bgr24")
+        img= frame.to_ndarray(format="bgr24")
         
         grayscale=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         
@@ -46,27 +50,22 @@ class VideoTransformer(VideoTransformerBase):
                          thickness=2)
             
             #converting obtained bgr image to grayscale
-            roi_gray=grayscale[y-5:y+h+5,x-5:x+w+5] #adding buffer
-            roi_gray=cv2.resize(roi_gray,(48,48))
-            image_pixels=img_to_array(roi_gray)
-            image_pixels=np.expand_dims(image_pixels,axis=0)
+            roi_gray=grayscale[y:y+h,x:x+w] #adding buffer
+            roi_gray=cv2.resize(roi_gray,(48,48).interpolation=cv2.INTER_AREA)
             
-            #normalizing
-            
-            image_pixels= image_pixels/255.
-            predictions= classifier.predict(image_pixels)
-            max_index=np.argmax(predictions[0])
-            
-            emotions= ['Angry','Disgusted','Fearful','Happy', 'Sad', 'Surprised', 'Neutral']
-            emotion_prediction=emotions[max_index]
-            
-            font=cv2.FONT_HERSHEY_SIMPLEX
-            lable_color=(0, 255, 0)
-            cv2.putText(img,emotion_prediction, (int(x),int(y)), font,0.9,lable_color,2)
+            if np.sum([roi_gray]) != 0:
+                roi=roi_gray.astype('float')/255.0
+                roi=img_to_array(roi)
+                prediction=classifier.predict(roi)[0]
+                maxindex=int(np.argmax(prediction))
+                emotions= ['Angry','Disgusted','Fearful','Happy', 'Sad', 'Surprised', 'Neutral']
+                finalout=emotions[maxindex]
+                output=str(finalout)
+            label_position=(x,y)
+            cv2.putText(img, lable_position, cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0),2)
+        
         return img
-
-
-# In[13]:
+            
 
 
 def main():
@@ -88,12 +87,9 @@ def main():
         st.markdown(home_html, unsafe_allow_html=True)
         st.write("Click on START to begin")
         
-        webrtc_streamer(key="example",video_transformer_factory=VideoTransformer, media_stream_constraints={
-            "video":True,
-            "audio":False},
-        rtc_configuration=RTCConfiguration(
-        {"iceServers":[{"urls":["stun:stun.1.google.com:19302"]}]}
-        ) )
+        webrtc_streamer(key="example", mode=WebRtcMode.SENDRECV, rtc_configuration=RTC_CONFIGURATION,
+                        video_processor_factory=VideoTransformer)
+
         
     elif page_name=="About":
         about_html="""<body>
