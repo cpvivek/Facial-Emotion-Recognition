@@ -57,7 +57,7 @@ def main():
     pages=["Home","About"]
     
     with st.sidebar:
-        st.title("select)
+        st.title("select")
         page_name=st.selectbox('select page:', pages)
                  
     st.title(page_name)
