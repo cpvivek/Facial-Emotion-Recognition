@@ -8,7 +8,7 @@ from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 from streamlit_webrtc import RTCConfiguration, VideoProcessorBase, WebRtcMode
 
 # load model
-emotion_dict = {0: 'angry', 1: 'disgusted', 2: 'fearful', 3: 'happy', 4: 'sad',5: 'suprised', 6: 'neutral'}
+emotion_dict = {0: 'angry', 1: 'disgusted', 2: 'fearful', 3: 'happy', 4: 'sad',5: 'surprised', 6: 'neutral'}
 # load json and create model
 json_file = open('model_fer_4.json', 'r')
 loaded_model_json = json_file.read()
