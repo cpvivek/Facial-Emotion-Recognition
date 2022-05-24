@@ -88,19 +88,19 @@ def main():
                             video_processor_factory=Faceemotion)
        
      elif page_name=='About':
-        """<body>
-        <h4 style="font-size:30px"> Facial emotion detection using CNN in real time</h4>
+            """<body>
+            <h4 style="font-size:30px"> Facial emotion detection using CNN in real time</h4>
             <body>""" 
         
         
-        st.markdown(about_html,unsafe_allow_html=True)
-        st.write("This project is developed by Vivek CP, Data Science Trainee at AlmaBetter.")
-        statement_html="""<body>
-        <h4 style="font-size:20px"> About Project </h4>
-        <p> Facial emotion recognition is an age old problem in the field of deep learning. The learning objective of the project is to gain hands on experience in developing a CNN model, and deploy it in real time. The model has achieved an training accuracy of 74% and test accuracy of 67%. The numbers can be improved by expanding the dataset and using techniques like transfer learning. This would be included in the future scope of the project. <p>
-        <body>"""
+            st.markdown(about_html,unsafe_allow_html=True)
+            st.write("This project is developed by Vivek CP, Data Science Trainee at AlmaBetter.")
+            statement_html="""<body>
+            <h4 style="font-size:20px"> About Project </h4>
+            <p> Facial emotion recognition is an age old problem in the field of deep learning. The learning objective of the project is to gain hands on experience in developing a CNN model, and deploy it in real time. The model has achieved an training accuracy of 74% and test accuracy of 67%. The numbers can be improved by expanding the dataset and using techniques like transfer learning. This would be included in the future scope of the project. <p>
+            <body>"""
         
-        st.markdown(statement_html,True)
+            st.markdown(statement_html,True)
 
       else:
         pass
