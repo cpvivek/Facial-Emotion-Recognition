@@ -67,7 +67,7 @@ def main():
         home_html = """
         <body style="background-color:blue;">
         <div style="background-color:red ;padding:10px">
-        <h2 style="color:white;text-align:center;">Facial Emotion Recognition Program/h2>
+        <h2 style="color:white;text-align:center;">Facial Emotion Recognition Program </h2>
         <style>#"An Application by Vivek CP" {text-align: center}</style>
         </div>
         </body>
