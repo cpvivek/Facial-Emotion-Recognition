@@ -6,12 +6,12 @@ from keras.utils import img_to_array
 import streamlit as st
 import cv2
 from keras.models import model_from_json
-from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, RTCConfiguration,WebRtcMode
+from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, VideoProcessorBase RTCConfiguration,WebRtcMode
 
 
 # In[12]:
 
-
+emotion_dict = {0: 'anger', 1: 'disgust', 2: 'fearful', 3: 'happy', 4: 'sad',5: 'suprise', 6: 'neutral'}
 #page title
 st.set_page_config(page_title="Facial Emotion Detection")
 #loading saved model
@@ -24,7 +24,7 @@ classifier.load_weights("model_fer_4.h5")
 
 #implimneting haarcascade
 try:
-    face_haar_cascade=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+    face_cascade=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 except Exception:
     st.write("haarcascade loading error")
 
@@ -34,12 +34,13 @@ RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.goog
 
     #capturing face from camera stream
 class VideoTransformer(VideoTransformerBase):
+    
     def transform(self,frame):
         img= frame.to_ndarray(format="bgr24")
         
         grayscale=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         
-        faces=face_haar_cascade.detectMultiScale(image=grayscale,scaleFactor=1.3,minNeighbors=5)
+        faces=face_cascade.detectMultiScale(image=grayscale,scaleFactor=1.3,minNeighbors=5)
         
         #forming box around face
         for (x,y,w,h) in faces:
@@ -58,11 +59,10 @@ class VideoTransformer(VideoTransformerBase):
                 roi=img_to_array(roi)
                 prediction=classifier.predict(roi)[0]
                 maxindex=int(np.argmax(prediction))
-                emotions= ['Angry','Disgusted','Fearful','Happy', 'Sad', 'Surprised', 'Neutral']
-                finalout=emotions[maxindex]
+                finalout=emotion_dict[maxindex]
                 output=str(finalout)
             label_position=(x,y)
-            cv2.putText(img, lable_position, cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0),2)
+            cv2.putText(img, output, lable_position, cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0),2)
         
         return img
             
