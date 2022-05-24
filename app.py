@@ -64,7 +64,7 @@ def main():
                  
     if page_name=='Home':
     # Face Emotion Application #
-        html_temp = """
+        home_html = """
         <body style="background-color:blue;">
         <div style="background-color:red ;padding:10px">
         <h2 style="color:white;text-align:center;">Face Emotion Recognisation App</h2>
@@ -74,7 +74,7 @@ def main():
         """
 
 
-        st.markdown(html_temp, unsafe_allow_html=True)
+        st.markdown(home_html, unsafe_allow_html=True)
         st.write("Project by Vivek CP")
         st.write("Facial Emotion Recognition in Real Time")
         st.write("**Instructions**")
@@ -88,7 +88,7 @@ def main():
                             video_processor_factory=Faceemotion)
        
     elif page_name=='About':
-        """<body>
+        about_html="""<body>
         <h4 style="font-size:30px"> Facial emotion detection using CNN in real time</h4>
         <body>""" 
         
