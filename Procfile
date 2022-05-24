@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run FER_Application_Streamlit.py
+web: sh setup.sh && streamlit run app_streamlit.py
