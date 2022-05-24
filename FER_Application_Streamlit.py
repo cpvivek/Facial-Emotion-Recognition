@@ -1,9 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[7]:
-
-
+#importing libraries
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
@@ -17,7 +12,7 @@ from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, RTCConfigura
 
 
 #page title
-st.set_page_config(page_title=' Facial Emotion Detection')
+st.set_page_config(page_title="Facial Emotion Detection")
 #loading saved model
 model=tf.keras.models.load_model('model_fer_4.h5')
 
@@ -32,7 +27,7 @@ class VideoTranformer(VideoTransformerBase):
     def transform(self,frame):
         img=frame.to_ndarray(format="bgr24")
         
-        grayscalei=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        grayscale=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         
         faces=face_haar_cascade.detectMultiScale(image=grayscale)
         
@@ -45,7 +40,7 @@ class VideoTranformer(VideoTransformerBase):
                          thickness=2)
             
             #converting obtained bgr image to grayscale
-            roi_gray=grayscale[y-5:y+h+5,x-5:x+w+5]
+            roi_gray=grayscale[y-5:y+h+5,x-5:x+w+5] #adding buffer
             roi_gray=cv2.resize(roi_gray,(48,48))
             image_pixels=img_too_array(roi_array)
             image_pixels=np.expand_dims(image_pixels,axis=0)
