@@ -53,34 +53,57 @@ class Faceemotion(VideoTransformerBase):
         return img
 
 def main():
+    
+    pages=["Home","About"]
+    
+    with st.sidebar:
+        st.title("select)
+        page_name=st.selectbox('select page:', pages)
+                 
+    st.title(page_name)
+                 
+    if page_name=='Home'
     # Face Emotion Application #
-    html_temp = """
-    <body style="background-color:red;">
-    <div style="background-color:blue ;padding:10px">
-    <h2 style="color:white;text-align:center;">Face Emotion Recognisation App</h2>
-    <style>#"Created by Lakshmi Narayana" {text-align: center}</style>
-    </div>
-    </body>
-    """
-  
+        html_temp = """
+        <body style="background-color:blue;">
+        <div style="background-color:red ;padding:10px">
+        <h2 style="color:white;text-align:center;">Face Emotion Recognisation App</h2>
+        <style>#"An Application by Vivek CP" {text-align: center}</style>
+        </div>
+        </body>
+        """
 
-    st.markdown(html_temp, unsafe_allow_html=True)
-    st.write("Project by Vivek CP")
-    st.write("Model built from OpenCV, Custom CNN model and Streamlit")
-    st.write("**Directions**")
-    st.write('''
-                
-                1. Click on the START button to start the session.
-                
-                2. Allow the Webcam access to utilise the service. 
+
+        st.markdown(html_temp, unsafe_allow_html=True)
+        st.write("Project by Vivek CP")
+        st.write("Facial Emotion Recognition in Real Time")
+        st.write("**Instructions**")
+        st.write('''
+
+                    Click on START, and grant access to webcam to start the program. The program will try to predict your emotion in real time.
+                    Click on STOP to end the session
+
+                    ''')
+        webrtc_streamer(key="example", mode=WebRtcMode.SENDRECV, rtc_configuration=RTC_CONFIGURATION,
+                            video_processor_factory=Faceemotion)
+       
+     elif page_name=='About':
+        """<body>
+        <h4 style="font-size:30px"> Facial emotion detection using CNN in real time</h4>
+            <body>""" 
         
-                3. It will predict the realtime face emotion using webcam.
-                
-                4. Click on STOP to end the session.
-                
-                ''')
-    webrtc_streamer(key="example", mode=WebRtcMode.SENDRECV, rtc_configuration=RTC_CONFIGURATION,
-                        video_processor_factory=Faceemotion)
+        
+        st.markdown(about_html,unsafe_allow_html=True)
+        st.write("This project is developed by Vivek CP, Data Science Trainee at AlmaBetter.")
+        statement_html="""<body>
+        <h4 style="font-size:20px"> About Project </h4>
+        <p> Facial emotion recognition is an age old problem in the field of deep learning. The learning objective of the project is to gain hands on experience in developing a CNN model, and deploy it in real time. The model has achieved an training accuracy of 74% and test accuracy of 67%. The numbers can be improved by expanding the dataset and using techniques like transfer learning. This would be included in the future scope of the project. <p>
+        <body>"""
+        
+        st.markdown(statement_html,True)
+
+      else:
+        pass
 
 
 if __name__ == "__main__":
