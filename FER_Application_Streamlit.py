@@ -51,7 +51,7 @@ class VideoTransformer(VideoTransformerBase):
             
             #converting obtained bgr image to grayscale
             roi_gray=grayscale[y:y+h,x:x+w] #adding buffer
-            roi_gray=cv2.resize(roi_gray,(48,48).interpolation=cv2.INTER_AREA)
+            roi_gray=cv2.resize(roi_gray,(48,48),interpolation=cv2.INTER_AREA)
             
             if np.sum([roi_gray]) != 0:
                 roi=roi_gray.astype('float')/255.0
